@@ -22,14 +22,9 @@ db.once('open', function callback (){
     log.info('Connected to db');
 });
 
-var ArticleModel = mongoose.model('Article', Article);
-var UserModel = mongoose.model('User', User);
-var ClientModel = mongoose.model('Client', Client);
-var AccessTokenModel = mongoose.model('AccessToken', AccessToken);
-var RefreshTokenModel = mongoose.model('RefreshToken', RefreshToken);
 
-module.exports.ArticleModel = ArticleModel;
-module.exports.UserModel = UserModel;
-module.exports.ClientModel = ClientModel;
-module.exports.AccessTokenModel = AccessTokenModel;
-module.exports.RefreshTokenModel = RefreshTokenModel;
+module.exports.ArticleModel = Article;
+module.exports.UserModel = User;
+module.exports.ClientModel = Client;
+module.exports.AccessTokenModel = AccessToken;
+module.exports.RefreshTokenModel = RefreshToken;

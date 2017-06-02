@@ -5,7 +5,8 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const log = require('./server/libs/log')(module);
 const config = require('config');
-var oauth2 = require('./server/libs/auth/oauth2');
+const oauth2 = require('./server/libs/auth/oauth2');
+const passport = require('passport');
 
 // Get our API routes
 const api = require('./server/routes/api');
@@ -25,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Set routes
 app.use('/api', api);
 app.use('/users', users);
-app.use('/users', init);
+app.use('/init', init);
 
 
 app.use(passport.initialize());

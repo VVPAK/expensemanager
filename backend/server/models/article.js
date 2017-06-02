@@ -1,4 +1,5 @@
-const Schema = require('mongoose').Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Schemas
 var Images = new Schema({
@@ -23,5 +24,7 @@ Article.path('title').validate(function (v) {
     return v.length > 5 && v.length < 70;
 });
 
-module.exports = Article;
+var ArticleModel = mongoose.model('Article', Article);
+
+module.exports = ArticleModel;
 

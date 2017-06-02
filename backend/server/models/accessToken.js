@@ -1,4 +1,5 @@
-const Schema = require('mongoose').Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 var AccessToken = new Schema({
     userId: {
@@ -20,4 +21,6 @@ var AccessToken = new Schema({
     }
 });
 
-module.exports = AccessToken;
+var AccessTokenModel = mongoose.model('AccessToken', AccessToken);
+
+module.exports = AccessTokenModel;

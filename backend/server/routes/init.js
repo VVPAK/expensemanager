@@ -11,14 +11,14 @@ const faker               = require('Faker');
 
 router.get('/', (req, res) => {
     UserModel.remove({}, function(err) {
-        var user = new UserModel({ username: "andrey", password: "simplepassword" });
+        var user = new UserModel({ username: "vvpak", password: "simplepassword" });
         user.save(function(err, user) {
             if(err) return log.error(err);
             else log.info("New user - %s:%s",user.username,user.password);
         });
 
         for(i=0; i<4; i++) {
-            var user = new UserModel({ username: faker.random.first_name().toLowerCase(), password: faker.Lorem.words(1)[0] });
+            var user = new UserModel({ username: faker.name.findName().toLowerCase(), password: "qwe" });
             user.save(function(err, user) {
                 if(err) return log.error(err);
                 else log.info("New user - %s:%s",user.username,user.password);
@@ -40,8 +40,7 @@ router.get('/', (req, res) => {
         if (err) return log.error(err);
     });
 
-    setTimeout(function() {
-        mongoose.disconnect();
-    }, 3000);
     res.send('Ok');
 });
+
+module.exports = router;

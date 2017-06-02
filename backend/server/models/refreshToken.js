@@ -1,4 +1,5 @@
-const Schema = require('mongoose').Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 var RefreshToken = new Schema({
     userId: {
@@ -20,4 +21,6 @@ var RefreshToken = new Schema({
     }
 });
 
-module.exports = RefreshToken;
+var RefreshTokenModel = mongoose.model('RefreshToken', RefreshToken);
+
+module.exports = RefreshTokenModel;

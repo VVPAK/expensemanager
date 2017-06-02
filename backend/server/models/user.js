@@ -1,5 +1,6 @@
 var crypto = require('crypto');
-var Schema = require('mongoose').Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // User
 var User = new Schema({
@@ -46,5 +47,7 @@ User.methods.checkPassword = function(password) {
     return this.encryptPassword(password) === this.hashedPassword;
 };
 
+var UserModel = mongoose.model('User', User);
+
 // make this available to our users in our Node applications
-module.exports = User;
+module.exports = UserModel;

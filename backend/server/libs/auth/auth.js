@@ -3,14 +3,13 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var ClientPasswordStrategy = require('passport-oauth2-client-password').Strategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
-var libs = process.cwd() + '/libs/';
 
 const config = require('config');
 
-var User = require(libs + 'model/user');
-var Client = require(libs + 'model/client');
-var AccessToken = require(libs + 'model/accessToken');
-var RefreshToken = require(libs + 'model/refreshToken');
+var User = require('../../models/user');
+var Client = require('../../models/client');
+var AccessToken = require('../../models/accessToken');
+var RefreshToken = require('../../models/refreshToken');
 
 passport.use(new BasicStrategy(
     function(username, password, done) {

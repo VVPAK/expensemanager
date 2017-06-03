@@ -1,3 +1,8 @@
 {"level":"info","message":"Express server listening on port 3000","timestamp":"2017-06-03T04:16:18.581Z"}
 {"level":"info","message":"Connected to db","timestamp":"2017-06-03T04:16:18.605Z"}
 {"level":"error","message":"Internal error(400): Unexpected string in JSON at position 58","timestamp":"2017-06-03T04:25:06.977Z"}
+{"level":"info","message":"Express server listening on port 3000","timestamp":"2017-06-03T13:22:17.518Z"}
+{"level":"info","message":"Connected to db","timestamp":"2017-06-03T13:22:17.539Z"}
+{"level":"info","message":"Express server listening on port 3000","timestamp":"2017-06-03T13:27:12.717Z"}
+{"level":"info","message":"Connected to db","timestamp":"2017-06-03T13:27:12.739Z"}
+{"level":"info","message":"Expense updated","timestamp":"2017-06-03T13:29:17.225Z"}

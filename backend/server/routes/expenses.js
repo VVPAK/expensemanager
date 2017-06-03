@@ -63,6 +63,38 @@ router.post('/', passport.authenticate('bearer', { session: false }), (req, res)
     });
 });
 
+router.put('/:id', passport.authenticate('bearer', { session: false }), (req, res) => {
+    return ExpenseModel.findById(req.params.id, function (err, expense) {
+        if(!expense) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        } else {
+            if (expense.userId != req.user.userId) {
+                res.statusCode = 401;
+                return res.send({ error: 'Access denied' })
+            }
+        }
+
+        expense.name = req.body.name;
+        expense.cost = req.body.cost;
+        return expense.save(function (err) {
+            if (!err) {
+                log.info("Expense updated");
+                return res.send({ status: 'OK', expense:expense });
+            } else {
+                if(err.name == 'ValidationError') {
+                    res.statusCode = 400;
+                    res.send({ error: 'Validation error' });
+                } else {
+                    res.statusCode = 500;
+                    res.send({ error: 'Server error' });
+                }
+                log.error('Internal error(%d): %s',res.statusCode,err.message);
+            }
+        });
+    });
+});
+
 router.delete('/:id', passport.authenticate('bearer', { session: false }), (req, res) => {
     let userId = req.user.userId;
 

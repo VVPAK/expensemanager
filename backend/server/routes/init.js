@@ -23,7 +23,17 @@ router.get('/', (req, res) => {
     });
 
     ClientModel.remove({}, function(err) {
-        var client = new ClientModel({ name: "OurService iOS client v1", clientId: "mobileV1", clientSecret:"abc123456" });
+        var client = new ClientModel({ name: "Postman test client", clientId: "test1", clientSecret:"023023" });
+        client.save(function(err, client) {
+            if(err) return log.error(err);
+            else log.info("New client - %s:%s",client.clientId,client.clientSecret);
+        });
+        var client = new ClientModel({ name: "Angular client", clientId: "web", clientSecret:"verystrongpassword" });
+        client.save(function(err, client) {
+            if(err) return log.error(err);
+            else log.info("New client - %s:%s",client.clientId,client.clientSecret);
+        });
+        var client = new ClientModel({ name: "iOS mobile client", clientId: "iOS", clientSecret:"verystrongpassword" });
         client.save(function(err, client) {
             if(err) return log.error(err);
             else log.info("New client - %s:%s",client.clientId,client.clientSecret);

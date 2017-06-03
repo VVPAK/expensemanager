@@ -12,6 +12,7 @@
 .project
 .classpath
 .c9/
+
 *.launch
 .settings/
 
@@ -38,3 +39,5 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+*.log

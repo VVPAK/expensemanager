@@ -12,7 +12,8 @@ router.get('/', function(req, res) {
             log.error('Internal error(%d): %s',res.statusCode,err.message);
             return res.send({ error: 'Server error' });
         }
-    });});
+    });
+});
 
 router.post('/', function(req, res) {
     var article = new ArticleModel({
@@ -81,7 +82,8 @@ router.put('/:id', function (req, res){
                 log.error('Internal error(%d): %s',res.statusCode,err.message);
             }
         });
-    });});
+    });
+});
 
 router.delete('/:id', function (req, res){
     log.info(`Trying to delete article with id = ${req.params.id}`);

@@ -10,7 +10,6 @@ const passport = require('passport');
 
 // Get routes
 const api = require('./server/routes/api');
-const users = require('./server/routes/users');
 const init = require('./server/routes/init');
 const expenses = require('./server/routes/expenses');
 
@@ -20,6 +19,12 @@ const app = express();
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.use(function (req, res, next) {
+  log.info(req.body);
+  next();
+});
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -43,7 +48,6 @@ app.get('/api/userInfo',
 
 // Set routes
 app.use('/api', api);
-app.use('/users', users);
 app.use('/init', init);
 
 

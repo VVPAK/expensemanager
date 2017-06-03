@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var log             = require('../libs/log')(module);
-var ArticleModel    = require('../libs/mongoose').ArticleModel;
-
+var ArticleModel    = require('../models/article');
 
 router.get('/', function(req, res) {
     return ArticleModel.find(function (err, articles) {
@@ -16,7 +15,6 @@ router.get('/', function(req, res) {
     });});
 
 router.post('/', function(req, res) {
-
     var article = new ArticleModel({
         title: req.body.title,
         author: req.body.author,
@@ -103,6 +101,7 @@ router.delete('/:id', function (req, res){
                 return res.send({ error: 'Server error' });
             }
         });
-    });});
+    });
+});
 
 module.exports = router;

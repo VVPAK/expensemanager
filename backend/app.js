@@ -8,13 +8,14 @@ const config = require('config');
 const oauth2 = require('./server/libs/auth/oauth2');
 const passport = require('passport');
 
-// Get our API routes
+// Get routes
 const api = require('./server/routes/api');
 const users = require('./server/routes/users');
 const init = require('./server/routes/init');
+const expenses = require('./server/routes/expenses');
 
+//App
 const app = express();
-
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -22,12 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
-
-// Set routes
-app.use('/api', api);
-app.use('/users', users);
-app.use('/init', init);
-
 
 app.use(passport.initialize());
 
@@ -46,40 +41,20 @@ app.get('/api/userInfo',
         }
 );
 
+// Set routes
+app.use('/api', api);
+app.use('/users', users);
+app.use('/init', init);
 
-// Catch all other routes and return the index file
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
 
-app.use(function(req, res, next){
-    res.status(404);
-    log.debug('Not found URL: %s',req.url);
-    res.send({ error: 'Not found' });
-    return;
+//Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
-
-app.use(function(err, req, res, next){
-    res.status(err.status || 500);
-    log.error('Internal error(%d): %s',res.statusCode,err.message);
-    res.send({ error: err.message });
-    return;
-});
-
-app.get('/ErrorExample', function(req, res, next){
-    next(new Error('Random error!'));
-});
-
-/**
- * Get port from environment and store in Express.
- */
 
 var port = config.get('port');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
 const server = http.createServer(app);
 
 /**
@@ -87,6 +62,5 @@ const server = http.createServer(app);
  */
 server.listen(port, () => 
 {
-  //console.log(`API running on localhost:${port}`);
   log.info(`Express server listening on port ${port}`);
 });

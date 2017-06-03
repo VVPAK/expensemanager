@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const articles = require('./articles');
+const expenses = require('./expenses');
 
 /* GET api listing. */
 router.get('/', (req, res) => {
@@ -8,5 +9,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/articles', articles);
+router.use('/expenses', expenses);
 
 module.exports = router;

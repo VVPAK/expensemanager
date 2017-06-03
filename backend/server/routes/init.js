@@ -1,29 +1,25 @@
 const express = require(`express`);
 const router = express.Router();
 const log                 = require('../libs/log')(module);
-const mongoose            = require('../libs/mongoose').mongoose;
-const UserModel           = require('../libs/mongoose').UserModel;
-const ClientModel         = require('../libs/mongoose').ClientModel;
-const AccessTokenModel    = require('../libs/mongoose').AccessTokenModel;
-const RefreshTokenModel   = require('../libs/mongoose').RefreshTokenModel;
+const UserModel           = require('../models/user');
+const ClientModel         = require('../models/client');
+const AccessTokenModel    = require('../models/accessToken');
+const RefreshTokenModel   = require('../models/refreshToken');
 const faker               = require('Faker');
-
 
 router.get('/', (req, res) => {
     UserModel.remove({}, function(err) {
-        var user = new UserModel({ username: "vvpak", password: "simplepassword" });
-        user.save(function(err, user) {
+        var admin = new UserModel({ username: "admin", password: "023023" });
+        admin.save(function(err, user) {
             if(err) return log.error(err);
             else log.info("New user - %s:%s",user.username,user.password);
         });
 
-        for(i=0; i<4; i++) {
-            var user = new UserModel({ username: faker.name.findName().toLowerCase(), password: "qwe" });
-            user.save(function(err, user) {
-                if(err) return log.error(err);
-                else log.info("New user - %s:%s",user.username,user.password);
-            });
-        }
+        var user = new UserModel({ username: "vvpak", password: "023023" });
+        user.save(function(err, user) {
+            if(err) return log.error(err);
+            else log.info("New user - %s:%s",user.username,user.password);
+        }); 
     });
 
     ClientModel.remove({}, function(err) {
@@ -33,9 +29,11 @@ router.get('/', (req, res) => {
             else log.info("New client - %s:%s",client.clientId,client.clientSecret);
         });
     });
+
     AccessTokenModel.remove({}, function (err) {
         if (err) return log.error(err);
     });
+    
     RefreshTokenModel.remove({}, function (err) {
         if (err) return log.error(err);
     });

@@ -21,10 +21,3 @@ db.on('error', function(err){
 db.once('open', function callback (){
     log.info('Connected to db');
 });
-
-
-module.exports.ArticleModel = Article;
-module.exports.UserModel = User;
-module.exports.ClientModel = Client;
-module.exports.AccessTokenModel = AccessToken;
-module.exports.RefreshTokenModel = RefreshToken;

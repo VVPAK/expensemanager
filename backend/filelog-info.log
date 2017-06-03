@@ -1,0 +1,3 @@
+{"level":"info","message":"Express server listening on port 3000","timestamp":"2017-06-03T04:16:18.581Z"}
+{"level":"info","message":"Connected to db","timestamp":"2017-06-03T04:16:18.605Z"}
+{"level":"error","message":"Internal error(400): Unexpected string in JSON at position 58","timestamp":"2017-06-03T04:25:06.977Z"}

@@ -3,7 +3,6 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var ClientPasswordStrategy = require('passport-oauth2-client-password').Strategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
-
 const config = require('config');
 
 var User = require('../../models/user');

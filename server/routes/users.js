@@ -12,13 +12,11 @@ router.post('/', (req, res) => {
     newUser.save(function(error, user) {
         if(error) {
             log.error(error);
-            res.statusCode = 500;
-            return res.send({ error: error });
+            return res.status(500).send(error);
         }
         else {
             log.info("New user - %s:%s",user.username,user.password);
-            res.statusCode = 201;
-            return res.end();
+            return res.status(204).end();
         }
     });
 });

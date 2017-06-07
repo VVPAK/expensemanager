@@ -1,9 +1,11 @@
+import { UsersModule } from './users/users.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdButtonModule, MdCheckboxModule, MdMenuModule } from '@angular/material';
 
-//Components
 import { AppComponent } from './app.component';
 
 import { AlertComponent } from './_directives/index';
@@ -13,8 +15,7 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 
-
-import { routing }        from './app.routing';
+import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,17 @@ import { routing }        from './app.routing';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    BrowserAnimationsModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MdMenuModule,
+    UsersModule
+  ],
+  exports: [
+    MdButtonModule,
+    MdCheckboxModule,
+    MdMenuModule
   ],
   providers: [
     AuthGuard,
@@ -36,6 +47,6 @@ import { routing }        from './app.routing';
     AuthenticationService,
     UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

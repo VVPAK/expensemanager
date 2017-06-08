@@ -10,6 +10,10 @@ var RefreshToken = new Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        required: true
+    },
     token: {
         type: String,
         unique: true,

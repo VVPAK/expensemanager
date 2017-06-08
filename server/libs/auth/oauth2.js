@@ -44,13 +44,14 @@ var generateTokens = function (data, done) {
 
     refreshToken.save(errorHandler);
 
+
     token.save(function (err) {
     	if (err) {
-			
 			log.error(err);
     		return done(err); 
     	}
     	done(null, tokenValue, refreshTokenValue, { 
+			'role': data.role,
     		'expires_in': config.get('security.tokenLife') 
     	});
     });
@@ -71,7 +72,8 @@ aserver.exchange(oauth2orize.exchange.password(function(client, username, passwo
 
 		var model = { 
 			userId: user.userId, 
-			clientId: client.clientId 
+			clientId: client.clientId,
+			role: user.role
 		};
 
 		generateTokens(model, done);
@@ -97,7 +99,8 @@ aserver.exchange(oauth2orize.exchange.refreshToken(function(client, refreshToken
 
 			var model = { 
 				userId: user.userId, 
-				clientId: client.clientId 
+				clientId: client.clientId,
+				role: user.role
 			};
 
 			generateTokens(model, done);

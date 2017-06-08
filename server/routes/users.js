@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    var newUser = new UserModel({ username: req.body.username, password: req.body.password });
+    var newUser = new UserModel({ username: req.body.username, password: req.body.password, role: "User" });
     newUser.save(function(error, user) {
         if(error) {
             log.error(error);

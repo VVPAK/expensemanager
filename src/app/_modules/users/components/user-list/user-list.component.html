@@ -1,0 +1,19 @@
+<table class="table">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>Login</td>
+            <td>Name</td>
+            <td>Options</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let user of users; let i = index;">
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.name.full }}</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

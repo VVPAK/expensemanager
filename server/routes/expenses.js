@@ -3,11 +3,11 @@ const router = express.Router();
 const log = require('../libs/log')(module);
 const passport = require('passport');
 
-var ExpenseModel = require('../models/expense');
+const ExpenseModel = require('../models/expense');
 
-router.get('/', passport.authenticate('bearer', { session: false }), (req, res) => {
+router.get('/', passport.authenticate('bearer', { session: false }), function(req, res) {
     let userId = req.user.userId;
-    return ExpenseModel.find({ userId: userId }, (err, expenses) => {
+    return ExpenseModel.find({ userId: userId }, function(err, expenses) {
         if (!err) {
             res.send(expenses);
         } else {
@@ -18,9 +18,9 @@ router.get('/', passport.authenticate('bearer', { session: false }), (req, res) 
     });
 });
 
-router.get('/:id', passport.authenticate('bearer', { session: false }), (req, res) => {
+router.get('/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
     let userId = req.user.userId;
-    ExpenseModel.findById(req.params.id, (err, expense) => {
+    ExpenseModel.findById(req.params.id, function(err, expense) {
         if (!err) {
             log.info(`User with id ${expense.userId} trying to get expense with id ${req.params.id}`);
 
@@ -38,7 +38,7 @@ router.get('/:id', passport.authenticate('bearer', { session: false }), (req, re
     })
 });
 
-router.post('/', passport.authenticate('bearer', { session: false }), (req, res) => {
+router.post('/', passport.authenticate('bearer', { session: false }), function(req, res) {
     var expense = new ExpenseModel({
         userId: req.user.userId,
         name: req.body.name,
@@ -63,8 +63,8 @@ router.post('/', passport.authenticate('bearer', { session: false }), (req, res)
     });
 });
 
-router.put('/:id', passport.authenticate('bearer', { session: false }), (req, res) => {
-    return ExpenseModel.findById(req.params.id, function (err, expense) {
+router.put('/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
+    return ExpenseModel.findById(req.params.id, function(err, expense) {
         if(!expense) {
             res.statusCode = 404;
             return res.send({ error: 'Not found' });
@@ -77,7 +77,7 @@ router.put('/:id', passport.authenticate('bearer', { session: false }), (req, re
 
         expense.name = req.body.name;
         expense.cost = req.body.cost;
-        return expense.save(function (err) {
+        return expense.save(function(err) {
             if (!err) {
                 log.info("Expense updated");
                 return res.send({ status: 'OK', expense:expense });
@@ -89,23 +89,23 @@ router.put('/:id', passport.authenticate('bearer', { session: false }), (req, re
                     res.statusCode = 500;
                     res.send({ error: 'Server error' });
                 }
-                log.error('Internal error(%d): %s',res.statusCode,err.message);
+                log.error('Internal error(%d): %s', res.statusCode, err.message);
             }
         });
     });
 });
 
-router.delete('/:id', passport.authenticate('bearer', { session: false }), (req, res) => {
+router.delete('/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
     let userId = req.user.userId;
 
-    return ExpenseModel.findById(req.params.id, (err, expense) => {
+    return ExpenseModel.findById(req.params.id, function(err, expense) {
         if(!expense) {
             res.statusCode = 404;
             return res.send({ error: 'Not found' });
         }
         if (expense.userId == userId) {
             log.info(`Trying to delete expense with id = ${req.params.id}`);
-            return expense.remove(function (err) {
+            return expense.remove(function(err) {
                 if (!err) {
                     log.info("Expense removed");
                     return res.send({ status: 'OK' });

@@ -2,6 +2,12 @@ export class User {
     id: string;
     username: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    name: {
+        first: string,
+        last: string
+    };
+
+    constructor() {
+        this.name = { first: '', last: ''};
+    }
 }

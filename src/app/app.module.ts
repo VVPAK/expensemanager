@@ -1,19 +1,19 @@
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './_modules/users/users.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdCheckboxModule, MdMenuModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-
 import { AlertComponent } from './_directives/index';
 import { AuthGuard, AdminGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { HomeComponent } from './home/index';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
+import { HomeComponent } from './_components/home/index';
+import { LoginComponent } from './_components/login/index';
+import { RegisterComponent } from './_components/register/index';
+
+import { NavmenuComponent } from './_components/navmenu/navmenu.component';
 
 import { routing } from './app.routing';
 
@@ -23,7 +23,8 @@ import { routing } from './app.routing';
     AlertComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavmenuComponent
   ],
   imports: [
     BrowserModule,
@@ -31,15 +32,9 @@ import { routing } from './app.routing';
     HttpModule,
     routing,
     BrowserAnimationsModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdMenuModule,
     UsersModule
   ],
   exports: [
-    MdButtonModule,
-    MdCheckboxModule,
-    MdMenuModule
   ],
   providers: [
     AuthGuard,

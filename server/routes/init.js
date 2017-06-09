@@ -9,13 +9,13 @@ const faker               = require('Faker');
 
 router.get('/', (req, res) => {
     UserModel.remove({}, function(err) {
-        var admin = new UserModel({ username: "admin", password: "023023", role: "Admin" });
+        var admin = new UserModel({ username: "admin", password: "023023", role: "Admin", name: { first: 'admin', last: 'admin' } });
         admin.save(function(err, user) {
             if(err) return log.error(err);
             else log.info("New user - %s:%s",user.username,user.password);
         });
 
-        var user = new UserModel({ username: "vvpak", password: "023023", role: "User" });
+        var user = new UserModel({ username: "vvpak", password: "023023", role: "User", name: { first: 'Vyacheslav', last: 'Pak' } } );
         user.save(function(err, user) {
             if(err) return log.error(err);
             else log.info("New user - %s:%s",user.username,user.password);

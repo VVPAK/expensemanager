@@ -8,9 +8,8 @@ router.get('/', function(req, res) {
         if (!err) {
             return res.send(articles);
         } else {
-            res.statusCode = 500;
             log.error('Internal error(%d): %s',res.statusCode,err.message);
-            return res.send({ error: 'Server error' });
+            return res.status(500).send({ error: 'Server error' });
         }
     });
 });
@@ -23,7 +22,7 @@ router.post('/', function(req, res) {
         images: req.body.images
     });
 
-    article.save(function (err) {
+    article.save(function(err) {
         if (!err) {
             log.info("article created");
             return res.send({ status: 'OK', article:article });
@@ -44,19 +43,18 @@ router.post('/', function(req, res) {
 router.get('/:id', function(req, res) {
     return ArticleModel.findById(req.params.id, function (err, article) {
         if(!article) {
-            res.statusCode = 404;
-            return res.send({ error: 'Not found' });
+            return res.send(404, { error: 'Not found' });
         }
         if (!err) {
             return res.send({ status: 'OK', article:article });
-        } else {
-            res.statusCode = 500;
+        } else {   
             log.error('Internal error(%d): %s',res.statusCode,err.message);
-            return res.send({ error: 'Server error' });
+            return res.send(500, { error: 'Server error' });
         }
-    });});
+    });
+});
 
-router.put('/:id', function (req, res){
+router.put('/:id', function(req, res){
     return ArticleModel.findById(req.params.id, function (err, article) {
         if(!article) {
             res.statusCode = 404;

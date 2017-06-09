@@ -9,15 +9,9 @@ var User = new Schema({
         unique: true,
         required: true
     },
-    firstName: {
-        type: String,
-        unique: false,
-        required: false
-    },
-    lastName: {
-        type: String,
-        unique: false,
-        required: false
+    name: {
+        first: String,
+        last: String
     },
     role: {
         type: String,
@@ -36,12 +30,37 @@ var User = new Schema({
         type: Date,
         default: Date.now
     }
+}, {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
 User.methods.encryptPassword = function(password) {
     return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
     //more secure - return crypto.pbkdf2Sync(password, this.salt, 10000, 512);
 };
+
+User.virtual('normalizedUsername')
+    .get(function() {
+        if (this.username) {
+            return this.username.toLowerCase();
+        }
+        return '';
+    });
+
+User.virtual('name.full')
+    .get(function() {
+        if (this.name != undefined) {
+            if (this.name.first != undefined) {
+                if (this.name.last != undefined) {
+                    const firstName = this.name.first.charAt(0).toUpperCase() + this.name.first.substr(1).toLowerCase();
+                    const lastName = this.name.last.charAt(0).toUpperCase() + this.name.last.substr(1).toLowerCase();
+                    return firstName + ' ' + lastName;
+                }
+            }
+        }
+        return "";
+    });
 
 User.virtual('userId')
     .get(function () {

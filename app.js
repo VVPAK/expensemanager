@@ -39,14 +39,14 @@ app.get('*', (req, res) => {
 });
 
 var port = config.get('port');
-app.set('port', port);
+//app.set('port', port);
 
 const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => 
+server.listen(process.env.PORT || port, () => 
 {
   log.info(`Express server listening on port ${port}`);
 });

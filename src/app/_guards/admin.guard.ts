@@ -8,11 +8,12 @@ export class AdminGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        var currentUser = localStorage.getItem('currentUser');
+        const currentUser = localStorage.getItem('currentUser');
 
         if (currentUser) {
-            if (JSON.parse(currentUser).role == "Admin")
+            if (JSON.parse(currentUser).role === 'Admin') {
                 return true;
+            }
             return false;
         }
 

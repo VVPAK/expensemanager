@@ -1,5 +1,5 @@
 {
-    "port" : 3000,
+    "port" : 8080,
 
     "mongoose": {
         "uri": "mongodb://admin:RXYp9qeJxe2z@vvpak-cluster-shard-00-00-yaunz.mongodb.net:27017,vvpak-cluster-shard-00-01-yaunz.mongodb.net:27017,vvpak-cluster-shard-00-02-yaunz.mongodb.net:27017/expenseManager?ssl=true&replicaSet=vvpak-cluster-shard-0&authSource=admin"

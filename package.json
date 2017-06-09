@@ -6,7 +6,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "node app",
+    "start": "node app.js",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
@@ -65,7 +65,7 @@
     "typescript": "^2.3.4"
   },
   "engines": {
-    "node": "8.0.0",
-    "npm": "5.0.0"
+    "node": "8.1.0",
+    "npm": "5.0.3"
   }
 }
